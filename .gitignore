@@ -1,0 +1,61 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.so
+.pytest_cache/
+*.egg-info/
+dist/
+build/
+
+# Virtual Environment
+.env
+.venv/
+venv/
+env/
+
+# Django
+*.sqlite3
+db.sqlite3
+*.log
+/staticfiles/
+/media/
+local_settings.py
+secret_key.txt
+
+# IDE
+.vscode/
+.idea/
+.DS_Store
+*.swp
+*.swo
+
+# OS
+Thumbs.db
+.directory
+
+# Coverage reports
+htmlcov/
+.coverage
+.coverage.*
+coverage.xml
+
+# Node modules (si usas npm/yarn)
+node_modules/
+
+# Backup files
+*.bak
+*.backup
+
+# Claude Code files
+CLAUDE.md
+.claude/
+*.claude_temp
+.claude_sessions/
+claude_conversations/
+
+# Development tools
+.devcontainer/
+docker-compose.override.yml

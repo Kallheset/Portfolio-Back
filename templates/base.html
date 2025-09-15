@@ -1,0 +1,303 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{% block title %}Portafolio - Argenis Manzanares{% endblock %}</title>
+  <!-- TailwindCSS via CDN for development -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: '#1e3a8a', // azul retro
+            secondary: '#000000', // negro
+          }
+        }
+      }
+    }
+  </script>
+  <!-- AOS for subtle on-scroll animations -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
+  {% block head_extra %}{% endblock %}
+</head>
+<body class="bg-black dark:bg-gray-50 text-white dark:text-gray-800 font-sans transition-colors duration-300">
+  <header class="relative text-center py-12 sm:py-16 bg-gradient-to-br from-gray-900 via-blue-900 to-black">
+    <div class="absolute inset-0 bg-black/30"></div>
+    <div class="relative z-10 px-4">
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-2">{{ settings.site_title }}</h1>
+      <h2 class="text-lg sm:text-xl lg:text-2xl text-blue-200">{{ settings.tagline }}</h2>
+    </div>
+    
+    <!-- Mobile menu button -->
+    <button id="mobile-menu-toggle" class="md:hidden fixed top-4 left-4 z-50 bg-blue-500 dark:bg-gray-700 text-white p-2 rounded-lg shadow-lg">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+      </svg>
+    </button>
+    
+    <!-- Desktop Navigation -->
+    <nav class="relative z-10 mt-6 hidden md:flex gap-4 lg:gap-6 justify-center text-blue-300">
+      <a class="hover:text-blue-400 transition-colors px-2 py-1" href="#sobre-mi">Sobre mí</a>
+      <a class="hover:text-blue-400 transition-colors px-2 py-1" href="#habilidades">Habilidades</a>
+      <a class="hover:text-blue-400 transition-colors px-2 py-1" href="#proyectos">Proyectos</a>
+      <a class="hover:text-blue-400 transition-colors px-2 py-1" href="#contacto">Contacto</a>
+    </nav>
+    
+    <!-- Mobile Navigation Menu -->
+    <nav id="mobile-menu" class="fixed inset-0 bg-black/95 dark:bg-gray-50/95 z-40 flex flex-col items-center justify-center space-y-8 text-xl text-blue-300 dark:text-blue-700 md:hidden transform translate-x-full transition-transform duration-300">
+      <a class="hover:text-blue-400 dark:hover:text-blue-800 transition-colors" href="#sobre-mi">Sobre mí</a>
+      <a class="hover:text-blue-400 dark:hover:text-blue-800 transition-colors" href="#habilidades">Habilidades</a>
+      <a class="hover:text-blue-400 dark:hover:text-blue-800 transition-colors" href="#proyectos">Proyectos</a>
+      <a class="hover:text-blue-400 dark:hover:text-blue-800 transition-colors" href="#contacto">Contacto</a>
+      
+      <!-- Close button -->
+      <button id="mobile-menu-close" class="absolute top-4 right-4 bg-blue-500 dark:bg-gray-700 text-white p-2 rounded-lg">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+    </nav>
+    
+    <!-- Dark Mode Toggle -->
+    <button id="theme-toggle" class="fixed top-4 right-4 z-50 bg-blue-500 dark:bg-gray-700 text-white p-2 sm:p-3 rounded-full shadow-lg hover:bg-blue-600 dark:hover:bg-gray-600 transition-all duration-300" aria-label="Toggle dark mode">
+      <svg id="theme-toggle-dark-icon" class="hidden w-4 h-4 sm:w-5 sm:h-5" fill="currentColor" viewBox="0 0 20 20">
+        <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+      </svg>
+      <svg id="theme-toggle-light-icon" class="w-4 h-4 sm:w-5 sm:h-5" fill="currentColor" viewBox="0 0 20 20">
+        <path d="M10 2L13.09 8.26L20 9L14 14.74L15.18 21.02L10 17.77L4.82 21.02L6 14.74L0 9L6.91 8.26L10 2Z"></path>
+      </svg>
+    </button>
+  </header>
+
+  <main>{% block content %}{% endblock %}</main>
+
+  <footer class="bg-gray-900 dark:bg-gray-200 py-8">
+    <!-- Download CV Button -->
+    <div class="text-center mb-6">
+      <a href="{% static settings.cv_file_path %}" class="inline-flex items-center gap-2 bg-blue-500 hover:bg-blue-400 text-white px-6 py-3 rounded-lg font-medium transition-all duration-300 hover:scale-105 shadow-lg" download>
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+        </svg>
+        Descargar mi CV
+      </a>
+    </div>
+    
+    <!-- Footer Info -->
+    <div class="border-t border-gray-700 dark:border-gray-300 pt-6">
+      <div class="max-w-6xl mx-auto px-4 text-center">
+        <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+          <!-- Copyright -->
+          <div class="text-gray-400 dark:text-gray-600 text-sm">
+            <p>&copy; 2025 Argenis Manzanares. Todos los derechos reservados.</p>
+          </div>
+          
+          <!-- Tech Stack -->
+          <div class="text-gray-400 dark:text-gray-600 text-sm">
+            <p>Desarrollado con 
+              <span class="text-blue-400 dark:text-blue-600 font-medium">Django</span> & 
+              <span class="text-blue-400 dark:text-blue-600 font-medium">TailwindCSS</span>
+            </p>
+          </div>
+          
+          <!-- Made with Love -->
+          <div class="text-gray-400 dark:text-gray-600 text-sm flex items-center gap-1">
+            <span>Hecho con</span>
+            <svg class="w-4 h-4 text-red-500 animate-pulse" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path>
+            </svg>
+            <span>y pasión</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 600, once: true, easing: 'ease-out' });
+    
+    // Dark mode functionality
+    function initDarkMode() {
+      const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+      const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+      const themeToggleBtn = document.getElementById('theme-toggle');
+
+      // Check if dark mode was previously set
+      if (localStorage.getItem('color-theme') === 'dark' || 
+          (!localStorage.getItem('color-theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+        themeToggleLightIcon.classList.add('hidden');
+        themeToggleDarkIcon.classList.remove('hidden');
+      } else {
+        document.documentElement.classList.remove('dark');
+        themeToggleDarkIcon.classList.add('hidden');
+        themeToggleLightIcon.classList.remove('hidden');
+      }
+
+      // Toggle dark mode
+      themeToggleBtn.addEventListener('click', function() {
+        themeToggleDarkIcon.classList.toggle('hidden');
+        themeToggleLightIcon.classList.toggle('hidden');
+
+        if (document.documentElement.classList.contains('dark')) {
+          document.documentElement.classList.remove('dark');
+          localStorage.setItem('color-theme', 'light');
+        } else {
+          document.documentElement.classList.add('dark');
+          localStorage.setItem('color-theme', 'dark');
+        }
+      });
+    }
+
+    // Project filtering functionality
+    function initProjectFilters() {
+      const filterButtons = document.querySelectorAll('.filter-btn');
+      const projectCards = document.querySelectorAll('.project-card');
+
+      filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          const filter = button.getAttribute('data-filter');
+          
+          // Update active button
+          filterButtons.forEach(btn => {
+            btn.classList.remove('active', 'bg-blue-500', 'dark:bg-blue-600');
+            btn.classList.add('bg-gray-700', 'dark:bg-gray-300');
+          });
+          
+          button.classList.add('active', 'bg-blue-500', 'dark:bg-blue-600');
+          button.classList.remove('bg-gray-700', 'dark:bg-gray-300');
+
+          // Filter projects
+          projectCards.forEach(card => {
+            const category = card.getAttribute('data-category');
+            
+            if (filter === 'all' || category === filter) {
+              card.style.display = 'block';
+              card.style.opacity = '0';
+              setTimeout(() => {
+                card.style.opacity = '1';
+              }, 100);
+            } else {
+              card.style.opacity = '0';
+              setTimeout(() => {
+                card.style.display = 'none';
+              }, 300);
+            }
+          });
+        });
+      });
+    }
+
+    // Smooth scrolling for internal anchors
+    document.addEventListener('DOMContentLoaded', () => {
+      // Initialize features
+      initDarkMode();
+      initProjectFilters();
+      document.querySelectorAll('a[href^="#"]').forEach(a => {
+        a.addEventListener('click', (e) => {
+          const id = a.getAttribute('href');
+          if (!id || id === '#') return;
+          const el = document.querySelector(id);
+          if (!el) return;
+          e.preventDefault();
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+      });
+
+      // Contact form functionality
+      const contactForm = document.getElementById('contact-form');
+      if (contactForm) {
+        contactForm.addEventListener('submit', async (e) => {
+          e.preventDefault();
+          
+          const submitBtn = document.getElementById('contact-submit');
+          const submitText = submitBtn.querySelector('.submit-text');
+          const loadingText = submitBtn.querySelector('.loading-text');
+          const messagesDiv = document.getElementById('form-messages');
+          
+          // Get form data
+          const formData = {
+            name: document.getElementById('contact-name').value.trim(),
+            email: document.getElementById('contact-email').value.trim(),
+            subject: document.getElementById('contact-subject').value.trim(),
+            message: document.getElementById('contact-message').value.trim()
+          };
+          
+          // Basic validation
+          if (!formData.name || !formData.email || !formData.subject || !formData.message) {
+            showMessage('Por favor completa todos los campos.', 'error');
+            return;
+          }
+          
+          // Show loading state
+          submitBtn.disabled = true;
+          submitText.classList.add('hidden');
+          loadingText.classList.remove('hidden');
+          
+          try {
+            const response = await fetch('/contact/', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': getCookie('csrftoken')
+              },
+              body: JSON.stringify(formData)
+            });
+            
+            const result = await response.json();
+            
+            if (result.success) {
+              showMessage(result.message, 'success');
+              contactForm.reset();
+            } else {
+              showMessage(result.message, 'error');
+            }
+          } catch (error) {
+            showMessage('Error al enviar el mensaje. Por favor inténtalo de nuevo.', 'error');
+          } finally {
+            // Reset button state
+            submitBtn.disabled = false;
+            submitText.classList.remove('hidden');
+            loadingText.classList.add('hidden');
+          }
+        });
+      }
+
+      // Utility functions
+      function showMessage(message, type) {
+        const messagesDiv = document.getElementById('form-messages');
+        const bgClass = type === 'success' ? 'bg-green-500/20 border-green-400 text-green-100' : 'bg-red-500/20 border-red-400 text-red-100';
+        
+        messagesDiv.className = `mb-4 p-3 rounded border ${bgClass}`;
+        messagesDiv.textContent = message;
+        messagesDiv.classList.remove('hidden');
+        
+        // Hide message after 5 seconds
+        setTimeout(() => {
+          messagesDiv.classList.add('hidden');
+        }, 5000);
+      }
+
+      function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+          const cookies = document.cookie.split(';');
+          for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+              cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+              break;
+            }
+          }
+        }
+        return cookieValue;
+      }
+    });
+  </script>
+  {% block body_extra %}{% endblock %}
+</body>
+</html>
