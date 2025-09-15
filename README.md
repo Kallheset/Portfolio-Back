@@ -30,8 +30,8 @@ Portfolio web desarrollado con Django para mostrar habilidades, proyectos y expe
 
 1. **Clona el repositorio**
    ```bash
-   git clone <tu-repositorio>
-   cd claude+deepsek
+   git clone https://github.com/Kallheset/Portfolio-Back.git
+   cd Portfolio-Back
    ```
 
 2. **Crea un entorno virtual**
@@ -70,7 +70,7 @@ Portfolio web desarrollado con Django para mostrar habilidades, proyectos y expe
 ## 📁 Estructura del Proyecto
 
 ```
-claude+deepsek/
+Portfolio-Back/
 ├── config/                 # Configuración de Django
 │   ├── settings.py        # Configuración principal
 │   ├── urls.py           # URLs principales
