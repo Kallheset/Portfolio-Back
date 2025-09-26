@@ -47,7 +47,18 @@
     
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="projects-grid">
       {% for p in projects %}
-      <article class="project-card bg-gray-800 dark:bg-gray-50 rounded-lg p-6 shadow-lg dark:shadow-xl hover:shadow-xl dark:hover:shadow-2xl transition-all duration-300 border-0 dark:border dark:border-gray-300" data-category="{{ p.category|default:'web'|lower }}">
+      {% comment %} Map category names to filter values {% endcomment %}
+      {% if p.category == "Web Application" %}
+      <article class="project-card bg-gray-800 dark:bg-gray-50 rounded-lg p-6 shadow-lg dark:shadow-xl hover:shadow-xl dark:hover:shadow-2xl transition-all duration-300 border-0 dark:border dark:border-gray-300" data-category="web">
+      {% elif p.category == "API" %}
+      <article class="project-card bg-gray-800 dark:bg-gray-50 rounded-lg p-6 shadow-lg dark:shadow-xl hover:shadow-xl dark:hover:shadow-2xl transition-all duration-300 border-0 dark:border dark:border-gray-300" data-category="api">
+      {% elif p.category == "Library" %}
+      <article class="project-card bg-gray-800 dark:bg-gray-50 rounded-lg p-6 shadow-lg dark:shadow-xl hover:shadow-xl dark:hover:shadow-2xl transition-all duration-300 border-0 dark:border dark:border-gray-300" data-category="library">
+      {% elif p.category == "Tool" %}
+      <article class="project-card bg-gray-800 dark:bg-gray-50 rounded-lg p-6 shadow-lg dark:shadow-xl hover:shadow-xl dark:hover:shadow-2xl transition-all duration-300 border-0 dark:border dark:border-gray-300" data-category="tool">
+      {% else %}
+      <article class="project-card bg-gray-800 dark:bg-gray-50 rounded-lg p-6 shadow-lg dark:shadow-xl hover:shadow-xl dark:hover:shadow-2xl transition-all duration-300 border-0 dark:border dark:border-gray-300" data-category="web">
+      {% endif %}
         <h4 class="text-xl font-bold mb-2 text-blue-300 dark:text-blue-600">{{ p.title }}</h4>
         <p class="text-blue-100 dark:text-gray-600 mb-4">{{ p.description }}</p>
         
