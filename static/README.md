@@ -6,7 +6,7 @@ Este directorio contiene todos los archivos estáticos del portfolio:
 ```
 static/
 ├── css/          # Archivos CSS personalizados
-├── js/           # JavaScript personalizado  
+├── js/           # JavaScript personalizado
 ├── images/       # Imágenes del portfolio
 ├── cv/           # Curriculum Vitae
 └── icons/        # Iconos y logos
@@ -21,4 +21,3 @@ static/
 - Los archivos aquí son servidos directamente por Django en desarrollo
 - En producción, usa un servidor web (nginx/apache) para servir archivos estáticos
 - Configura `STATIC_ROOT` en settings.py para producción
-

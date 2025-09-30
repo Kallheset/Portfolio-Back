@@ -1,61 +1,191 @@
+# =============================================================================
 # Python
+# =============================================================================
 __pycache__/
 *.py[cod]
-*.pyo
-*.pyd
-.Python
+*$py.class
 *.so
-.pytest_cache/
-*.egg-info/
-dist/
+.Python
 build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+pip-log.txt
+pip-delete-this-directory.txt
 
-# Virtual Environment
+# =============================================================================
+# Virtual Environments
+# =============================================================================
 .env
-.venv/
-venv/
+.venv
 env/
+venv/
+ENV/
+env.bak/
+venv.bak/
 
+# =============================================================================
 # Django
-*.sqlite3
-db.sqlite3
+# =============================================================================
 *.log
-/staticfiles/
-/media/
 local_settings.py
-secret_key.txt
+db.sqlite3
+db.sqlite3-journal
+/media
+/staticfiles
+/static_root
 
-# IDE
-.vscode/
-.idea/
-.DS_Store
-*.swp
-*.swo
-
-# OS
-Thumbs.db
-.directory
-
-# Coverage reports
-htmlcov/
+# =============================================================================
+# Testing
+# =============================================================================
+.tox/
+.nox/
 .coverage
 .coverage.*
+.cache
+nosetests.xml
 coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+cover/
+htmlcov/
 
-# Node modules (si usas npm/yarn)
-node_modules/
+# =============================================================================
+# IDEs
+# =============================================================================
+# PyCharm
+.idea/
+*.iml
+*.iws
 
-# Backup files
+# VSCode
+.vscode/
+*.code-workspace
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Visual Studio
+.vs/
+
+# =============================================================================
+# OS
+# =============================================================================
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.stackdump
+[Dd]esktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+# =============================================================================
+# Security & Sensitive Files
+# =============================================================================
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+*.crt
+*.csr
+secrets.json
+credentials.json
+
+# =============================================================================
+# Logs
+# =============================================================================
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# =============================================================================
+# Backup Files
+# =============================================================================
 *.bak
 *.backup
+*.old
+*.orig
+*.swp
+*.swo
+*~
 
-# Claude Code files
+# =============================================================================
+# Project Specific
+# =============================================================================
+# Migrations (optional - uncomment if you don't want to track migrations)
+# */migrations/*.py
+# !*/migrations/__init__.py
+
+# Static files collected for production
+/staticfiles/
+/static_root/
+
+# Media uploads
+/media/
+
+# Documentation builds
+docs/_build/
+site/
+
+# =============================================================================
+# Development & AI Assistant Files
+# =============================================================================
+# Claude Code development documentation
 CLAUDE.md
 .claude/
-*.claude_temp
-.claude_sessions/
-claude_conversations/
+.cursorrules
+.cursor/
 
-# Development tools
-.devcontainer/
-docker-compose.override.yml
+# GitHub Copilot
+.github/copilot-*
+
+# AI prompt files
+prompts/
+.prompts/
+
+# Development notes and TODO files (keep project TODO.md if you want)
+TODO.txt
+NOTES.md
+NOTES.txt
+DEV_NOTES.md
+
+# Pre-commit hooks cache
+.pre-commit-config.yaml.backup
+
+# Old/backup settings files
+*.old
+config/settings.py.old

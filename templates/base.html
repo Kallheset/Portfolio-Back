@@ -31,14 +31,14 @@
       <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-2">{{ settings.site_title }}</h1>
       <h2 class="text-lg sm:text-xl lg:text-2xl text-blue-200">{{ settings.tagline }}</h2>
     </div>
-    
+
     <!-- Mobile menu button -->
     <button id="mobile-menu-toggle" class="md:hidden fixed top-4 left-4 z-50 bg-blue-500 dark:bg-gray-700 text-white p-2 rounded-lg shadow-lg">
       <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
       </svg>
     </button>
-    
+
     <!-- Desktop Navigation -->
     <nav class="relative z-10 mt-6 hidden md:flex gap-4 lg:gap-6 justify-center text-blue-300">
       <a class="hover:text-blue-400 transition-colors px-2 py-1" href="#sobre-mi">Sobre mí</a>
@@ -46,14 +46,14 @@
       <a class="hover:text-blue-400 transition-colors px-2 py-1" href="#proyectos">Proyectos</a>
       <a class="hover:text-blue-400 transition-colors px-2 py-1" href="#contacto">Contacto</a>
     </nav>
-    
+
     <!-- Mobile Navigation Menu -->
     <nav id="mobile-menu" class="fixed inset-0 bg-black/95 dark:bg-gray-50/95 z-40 flex flex-col items-center justify-center space-y-8 text-xl text-blue-300 dark:text-blue-700 md:hidden transform translate-x-full transition-transform duration-300">
       <a class="hover:text-blue-400 dark:hover:text-blue-800 transition-colors" href="#sobre-mi">Sobre mí</a>
       <a class="hover:text-blue-400 dark:hover:text-blue-800 transition-colors" href="#habilidades">Habilidades</a>
       <a class="hover:text-blue-400 dark:hover:text-blue-800 transition-colors" href="#proyectos">Proyectos</a>
       <a class="hover:text-blue-400 dark:hover:text-blue-800 transition-colors" href="#contacto">Contacto</a>
-      
+
       <!-- Close button -->
       <button id="mobile-menu-close" class="absolute top-4 right-4 bg-blue-500 dark:bg-gray-700 text-white p-2 rounded-lg">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -61,7 +61,7 @@
         </svg>
       </button>
     </nav>
-    
+
     <!-- Dark Mode Toggle -->
     <button id="theme-toggle" class="fixed top-4 right-4 z-50 bg-blue-500 dark:bg-gray-700 text-white p-2 sm:p-3 rounded-full shadow-lg hover:bg-blue-600 dark:hover:bg-gray-600 transition-all duration-300" aria-label="Toggle dark mode">
       <svg id="theme-toggle-dark-icon" class="hidden w-4 h-4 sm:w-5 sm:h-5" fill="currentColor" viewBox="0 0 20 20">
@@ -85,7 +85,7 @@
         Descargar mi CV
       </a>
     </div>
-    
+
     <!-- Footer Info -->
     <div class="border-t border-gray-700 dark:border-gray-300 pt-6">
       <div class="max-w-6xl mx-auto px-4 text-center">
@@ -94,15 +94,15 @@
           <div class="text-gray-400 dark:text-gray-600 text-sm">
             <p>&copy; 2025 Argenis Manzanares. Todos los derechos reservados.</p>
           </div>
-          
+
           <!-- Tech Stack -->
           <div class="text-gray-400 dark:text-gray-600 text-sm">
-            <p>Desarrollado con 
-              <span class="text-blue-400 dark:text-blue-600 font-medium">Django</span> & 
+            <p>Desarrollado con
+              <span class="text-blue-400 dark:text-blue-600 font-medium">Django</span> &
               <span class="text-blue-400 dark:text-blue-600 font-medium">TailwindCSS</span>
             </p>
           </div>
-          
+
           <!-- Made with Love -->
           <div class="text-gray-400 dark:text-gray-600 text-sm flex items-center gap-1">
             <span>Hecho con</span>
@@ -119,7 +119,7 @@
   <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
   <script>
     AOS.init({ duration: 600, once: true, easing: 'ease-out' });
-    
+
     // Dark mode functionality
     function initDarkMode() {
       const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
@@ -127,7 +127,7 @@
       const themeToggleBtn = document.getElementById('theme-toggle');
 
       // Check if dark mode was previously set
-      if (localStorage.getItem('color-theme') === 'dark' || 
+      if (localStorage.getItem('color-theme') === 'dark' ||
           (!localStorage.getItem('color-theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
         document.documentElement.classList.add('dark');
         themeToggleLightIcon.classList.add('hidden');
@@ -161,20 +161,20 @@
       filterButtons.forEach(button => {
         button.addEventListener('click', () => {
           const filter = button.getAttribute('data-filter');
-          
+
           // Update active button
           filterButtons.forEach(btn => {
             btn.classList.remove('active', 'bg-blue-500', 'dark:bg-blue-600');
             btn.classList.add('bg-gray-700', 'dark:bg-gray-300');
           });
-          
+
           button.classList.add('active', 'bg-blue-500', 'dark:bg-blue-600');
           button.classList.remove('bg-gray-700', 'dark:bg-gray-300');
 
           // Filter projects
           projectCards.forEach(card => {
             const category = card.getAttribute('data-category');
-            
+
             if (filter === 'all' || category === filter) {
               card.style.display = 'block';
               card.style.opacity = '0';
@@ -213,12 +213,12 @@
       if (contactForm) {
         contactForm.addEventListener('submit', async (e) => {
           e.preventDefault();
-          
+
           const submitBtn = document.getElementById('contact-submit');
           const submitText = submitBtn.querySelector('.submit-text');
           const loadingText = submitBtn.querySelector('.loading-text');
           const messagesDiv = document.getElementById('form-messages');
-          
+
           // Get form data
           const formData = {
             name: document.getElementById('contact-name').value.trim(),
@@ -226,18 +226,18 @@
             subject: document.getElementById('contact-subject').value.trim(),
             message: document.getElementById('contact-message').value.trim()
           };
-          
+
           // Basic validation
           if (!formData.name || !formData.email || !formData.subject || !formData.message) {
             showMessage('Por favor completa todos los campos.', 'error');
             return;
           }
-          
+
           // Show loading state
           submitBtn.disabled = true;
           submitText.classList.add('hidden');
           loadingText.classList.remove('hidden');
-          
+
           try {
             const response = await fetch('/contact/', {
               method: 'POST',
@@ -247,9 +247,9 @@
               },
               body: JSON.stringify(formData)
             });
-            
+
             const result = await response.json();
-            
+
             if (result.success) {
               showMessage(result.message, 'success');
               contactForm.reset();
@@ -271,11 +271,11 @@
       function showMessage(message, type) {
         const messagesDiv = document.getElementById('form-messages');
         const bgClass = type === 'success' ? 'bg-green-500/20 border-green-400 text-green-100' : 'bg-red-500/20 border-red-400 text-red-100';
-        
+
         messagesDiv.className = `mb-4 p-3 rounded border ${bgClass}`;
         messagesDiv.textContent = message;
         messagesDiv.classList.remove('hidden');
-        
+
         // Hide message after 5 seconds
         setTimeout(() => {
           messagesDiv.classList.add('hidden');

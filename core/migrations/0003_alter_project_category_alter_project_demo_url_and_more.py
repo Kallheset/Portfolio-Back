@@ -6,7 +6,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("core", "0002_alter_contactmessage_options_and_more"),
     ]
@@ -65,9 +64,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="project",
             name="start_date",
-            field=models.DateField(
-                blank=True, null=True, verbose_name="Fecha de inicio"
-            ),
+            field=models.DateField(blank=True, null=True, verbose_name="Fecha de inicio"),
         ),
         migrations.AlterField(
             model_name="project",
@@ -179,9 +176,7 @@ class Migration(migrations.Migration):
         migrations.AddConstraint(
             model_name="skill",
             constraint=models.CheckConstraint(
-                condition=models.Q(
-                    ("proficiency_level__gte", 1), ("proficiency_level__lte", 4)
-                ),
+                condition=models.Q(("proficiency_level__gte", 1), ("proficiency_level__lte", 4)),
                 name="valid_proficiency_level",
             ),
         ),

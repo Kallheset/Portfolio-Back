@@ -17,7 +17,7 @@
           <div class="relative group flex items-center gap-2 bg-blue-500 dark:bg-blue-600 text-black dark:text-white rounded-full px-3 sm:px-4 py-2 shadow hover:scale-105 transition transform cursor-pointer">
             <img src="{{ skill.icon_url }}" alt="{{ skill.name }} logo" class="h-4 w-4 sm:h-5 sm:w-5" loading="lazy" />
             <span class="font-medium text-sm sm:text-base">{{ skill.name }}</span>
-            
+
             <!-- Tooltip -->
             <div class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-gray-900 dark:bg-gray-700 text-white dark:text-gray-100 text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap z-10">
               Nivel: {{ skill.proficiency_display }}
@@ -31,7 +31,7 @@
 
   <section id="proyectos" class="px-6 py-12" data-aos="fade-up">
     <h3 class="text-3xl font-semibold mb-6 text-blue-400 dark:text-blue-600 text-center">Proyectos</h3>
-    
+
     <!-- Project Filter Buttons -->
     <div class="flex flex-wrap justify-center gap-2 mb-8">
       <button class="filter-btn active bg-blue-500 dark:bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-blue-600 dark:hover:bg-blue-700 transition" data-filter="all">
@@ -44,7 +44,7 @@
         APIs
       </button>
     </div>
-    
+
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="projects-grid">
       {% for p in projects %}
       {% comment %} Map category names to filter values {% endcomment %}
@@ -61,7 +61,7 @@
       {% endif %}
         <h4 class="text-xl font-bold mb-2 text-blue-300 dark:text-blue-600">{{ p.title }}</h4>
         <p class="text-blue-100 dark:text-gray-600 mb-4">{{ p.description }}</p>
-        
+
         <!-- Technologies -->
         {% if p.technologies %}
         <div class="flex flex-wrap gap-1 mb-4">
@@ -70,14 +70,14 @@
           {% endfor %}
         </div>
         {% endif %}
-        
+
         <!-- Status Badge -->
         {% if p.status %}
         <div class="mb-4">
           <span class="bg-green-500/20 dark:bg-green-100 text-green-200 dark:text-green-800 px-2 py-1 rounded-full text-xs">{{ p.status }}</span>
         </div>
         {% endif %}
-        
+
         <div class="flex gap-4">
           {% if p.github %}
           <a class="text-blue-400 dark:text-blue-600 hover:underline flex items-center gap-1" href="{{ p.github }}" target="_blank" rel="noopener">
@@ -103,7 +103,7 @@
 
   <section id="contacto" class="px-6 py-12 bg-gray-900/60 dark:bg-gray-100/80" data-aos="fade-up">
     <h3 class="text-3xl font-semibold mb-8 text-blue-400 dark:text-blue-600 text-center">Contacto</h3>
-    
+
     <!-- Contact Links with Icons -->
     <div class="max-w-2xl mx-auto mb-8">
       <div class="flex flex-wrap justify-center gap-6 mb-6">
@@ -118,7 +118,7 @@
             <p class="text-blue-300 dark:text-blue-700 font-medium">{{ settings.email }}</p>
           </div>
         </a>
-        
+
         <!-- GitHub -->
         <a href="{{ github_url }}" target="_blank" rel="noopener" class="flex items-center gap-3 bg-gray-800 dark:bg-white hover:bg-gray-700 dark:hover:bg-gray-50 px-4 py-3 rounded-lg transition-all duration-300 group">
           <svg class="w-6 h-6 text-blue-400 dark:text-blue-600 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 20 20">
@@ -129,7 +129,7 @@
             <p class="text-blue-300 dark:text-blue-700 font-medium">@Kallheset</p>
           </div>
         </a>
-        
+
         <!-- LinkedIn -->
         <a href="{{ settings.linkedin_url }}" target="_blank" rel="noopener" class="flex items-center gap-3 bg-gray-800 dark:bg-white hover:bg-gray-700 dark:hover:bg-gray-50 px-4 py-3 rounded-lg transition-all duration-300 group">
           <svg class="w-6 h-6 text-blue-400 dark:text-blue-600 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 20 20">
@@ -146,33 +146,33 @@
     <form id="contact-form" class="mt-6 max-w-2xl mx-auto" data-aos="fade-up">
       <div id="form-messages" class="hidden mb-4"></div>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <input 
-          id="contact-name" 
-          class="border border-gray-600 dark:border-gray-300 rounded p-3 bg-black/40 dark:bg-white text-white dark:text-gray-900 placeholder-gray-400 dark:placeholder-gray-500 focus:border-blue-400 dark:focus:border-blue-600 focus:outline-none transition" 
-          type="text" 
-          placeholder="Tu nombre" 
+        <input
+          id="contact-name"
+          class="border border-gray-600 dark:border-gray-300 rounded p-3 bg-black/40 dark:bg-white text-white dark:text-gray-900 placeholder-gray-400 dark:placeholder-gray-500 focus:border-blue-400 dark:focus:border-blue-600 focus:outline-none transition"
+          type="text"
+          placeholder="Tu nombre"
           required>
-        <input 
-          id="contact-email" 
-          class="border border-gray-600 dark:border-gray-300 rounded p-3 bg-black/40 dark:bg-white text-white dark:text-gray-900 placeholder-gray-400 dark:placeholder-gray-500 focus:border-blue-400 dark:focus:border-blue-600 focus:outline-none transition" 
-          type="email" 
-          placeholder="Tu email" 
+        <input
+          id="contact-email"
+          class="border border-gray-600 dark:border-gray-300 rounded p-3 bg-black/40 dark:bg-white text-white dark:text-gray-900 placeholder-gray-400 dark:placeholder-gray-500 focus:border-blue-400 dark:focus:border-blue-600 focus:outline-none transition"
+          type="email"
+          placeholder="Tu email"
           required>
       </div>
-      <input 
-        id="contact-subject" 
-        class="border border-gray-600 dark:border-gray-300 rounded p-3 bg-black/40 dark:bg-white text-white dark:text-gray-900 placeholder-gray-400 dark:placeholder-gray-500 focus:border-blue-400 dark:focus:border-blue-600 focus:outline-none transition w-full mt-4" 
-        type="text" 
-        placeholder="Asunto" 
+      <input
+        id="contact-subject"
+        class="border border-gray-600 dark:border-gray-300 rounded p-3 bg-black/40 dark:bg-white text-white dark:text-gray-900 placeholder-gray-400 dark:placeholder-gray-500 focus:border-blue-400 dark:focus:border-blue-600 focus:outline-none transition w-full mt-4"
+        type="text"
+        placeholder="Asunto"
         required>
-      <textarea 
-        id="contact-message" 
-        class="border border-gray-600 dark:border-gray-300 rounded p-3 bg-black/40 dark:bg-white text-white dark:text-gray-900 placeholder-gray-400 dark:placeholder-gray-500 focus:border-blue-400 dark:focus:border-blue-600 focus:outline-none transition w-full mt-4" 
-        rows="4" 
-        placeholder="Tu mensaje" 
+      <textarea
+        id="contact-message"
+        class="border border-gray-600 dark:border-gray-300 rounded p-3 bg-black/40 dark:bg-white text-white dark:text-gray-900 placeholder-gray-400 dark:placeholder-gray-500 focus:border-blue-400 dark:focus:border-blue-600 focus:outline-none transition w-full mt-4"
+        rows="4"
+        placeholder="Tu mensaje"
         required></textarea>
-      <button 
-        type="submit" 
+      <button
+        type="submit"
         id="contact-submit"
         class="mt-4 bg-blue-500 dark:bg-blue-600 text-white hover:bg-blue-400 dark:hover:bg-blue-700 transition font-semibold disabled:opacity-50 disabled:cursor-not-allowed rounded px-5 py-2">
         <span class="submit-text">Enviar Mensaje</span>

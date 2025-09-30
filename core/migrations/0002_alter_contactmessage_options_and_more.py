@@ -5,7 +5,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("core", "0001_initial"),
     ]
@@ -54,9 +53,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name="contactmessage",
             name="admin_notes",
-            field=models.TextField(
-                blank=True, help_text="Notas internas del administrador"
-            ),
+            field=models.TextField(blank=True, help_text="Notas internas del administrador"),
         ),
         migrations.AddField(
             model_name="contactmessage",
@@ -115,27 +112,19 @@ class Migration(migrations.Migration):
         ),
         migrations.AddIndex(
             model_name="experience",
-            index=models.Index(
-                fields=["is_featured"], name="core_experi_is_feat_53cc41_idx"
-            ),
+            index=models.Index(fields=["is_featured"], name="core_experi_is_feat_53cc41_idx"),
         ),
         migrations.AddIndex(
             model_name="experience",
-            index=models.Index(
-                fields=["experience_type"], name="core_experi_experie_e2c0d1_idx"
-            ),
+            index=models.Index(fields=["experience_type"], name="core_experi_experie_e2c0d1_idx"),
         ),
         migrations.AddIndex(
             model_name="experience",
-            index=models.Index(
-                fields=["is_current"], name="core_experi_is_curr_de8139_idx"
-            ),
+            index=models.Index(fields=["is_current"], name="core_experi_is_curr_de8139_idx"),
         ),
         migrations.AddIndex(
             model_name="project",
-            index=models.Index(
-                fields=["is_featured"], name="core_projec_is_feat_e41834_idx"
-            ),
+            index=models.Index(fields=["is_featured"], name="core_projec_is_feat_e41834_idx"),
         ),
         migrations.AddIndex(
             model_name="project",
@@ -143,32 +132,22 @@ class Migration(migrations.Migration):
         ),
         migrations.AddIndex(
             model_name="project",
-            index=models.Index(
-                fields=["category"], name="core_projec_categor_55bb7a_idx"
-            ),
+            index=models.Index(fields=["category"], name="core_projec_categor_55bb7a_idx"),
         ),
         migrations.AddIndex(
             model_name="project",
-            index=models.Index(
-                fields=["display_order"], name="core_projec_display_3a3e0f_idx"
-            ),
+            index=models.Index(fields=["display_order"], name="core_projec_display_3a3e0f_idx"),
         ),
         migrations.AddIndex(
             model_name="skill",
-            index=models.Index(
-                fields=["is_featured"], name="core_skill_is_feat_71a261_idx"
-            ),
+            index=models.Index(fields=["is_featured"], name="core_skill_is_feat_71a261_idx"),
         ),
         migrations.AddIndex(
             model_name="skill",
-            index=models.Index(
-                fields=["category"], name="core_skill_categor_881ec3_idx"
-            ),
+            index=models.Index(fields=["category"], name="core_skill_categor_881ec3_idx"),
         ),
         migrations.AddIndex(
             model_name="skill",
-            index=models.Index(
-                fields=["display_order"], name="core_skill_display_69a162_idx"
-            ),
+            index=models.Index(fields=["display_order"], name="core_skill_display_69a162_idx"),
         ),
     ]

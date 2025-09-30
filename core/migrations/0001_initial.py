@@ -5,7 +5,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = []
@@ -52,9 +51,7 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "tagline",
-                    models.CharField(
-                        default="Desarrollador Backend en Python", max_length=300
-                    ),
+                    models.CharField(default="Desarrollador Backend en Python", max_length=300),
                 ),
                 (
                     "about_me",
@@ -164,15 +161,11 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "is_featured",
-                    models.BooleanField(
-                        default=True, help_text="Mostrar en el portfolio"
-                    ),
+                    models.BooleanField(default=True, help_text="Mostrar en el portfolio"),
                 ),
                 (
                     "display_order",
-                    models.PositiveIntegerField(
-                        default=0, help_text="Orden de visualización"
-                    ),
+                    models.PositiveIntegerField(default=0, help_text="Orden de visualización"),
                 ),
                 ("created_at", models.DateTimeField(auto_now_add=True)),
                 ("updated_at", models.DateTimeField(auto_now=True)),
@@ -197,9 +190,7 @@ class Migration(migrations.Migration):
                 ("description", models.TextField()),
                 (
                     "detailed_description",
-                    models.TextField(
-                        blank=True, help_text="Descripción detallada opcional"
-                    ),
+                    models.TextField(blank=True, help_text="Descripción detallada opcional"),
                 ),
                 ("github_url", models.URLField(blank=True, null=True)),
                 ("demo_url", models.URLField(blank=True, null=True)),
@@ -218,15 +209,11 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "is_featured",
-                    models.BooleanField(
-                        default=True, help_text="Mostrar en el portfolio"
-                    ),
+                    models.BooleanField(default=True, help_text="Mostrar en el portfolio"),
                 ),
                 (
                     "display_order",
-                    models.PositiveIntegerField(
-                        default=0, help_text="Orden de visualización"
-                    ),
+                    models.PositiveIntegerField(default=0, help_text="Orden de visualización"),
                 ),
                 ("start_date", models.DateField(blank=True, null=True)),
                 ("end_date", models.DateField(blank=True, null=True)),
@@ -284,21 +271,15 @@ class Migration(migrations.Migration):
                 ("start_date", models.DateField()),
                 (
                     "end_date",
-                    models.DateField(
-                        blank=True, help_text="Dejar vacío si es actual", null=True
-                    ),
+                    models.DateField(blank=True, help_text="Dejar vacío si es actual", null=True),
                 ),
                 (
                     "is_current",
-                    models.BooleanField(
-                        default=False, help_text="¿Es el trabajo/estudio actual?"
-                    ),
+                    models.BooleanField(default=False, help_text="¿Es el trabajo/estudio actual?"),
                 ),
                 (
                     "is_featured",
-                    models.BooleanField(
-                        default=True, help_text="Mostrar en el portfolio"
-                    ),
+                    models.BooleanField(default=True, help_text="Mostrar en el portfolio"),
                 ),
                 ("display_order", models.PositiveIntegerField(default=0)),
                 ("created_at", models.DateTimeField(auto_now_add=True)),

@@ -1,6 +1,7 @@
-from django.db import models
-from django.core.validators import URLValidator, MinValueValidator, MaxValueValidator, RegexValidator
+"""Django models for portfolio application."""
 from django.core.exceptions import ValidationError
+from django.core.validators import MaxValueValidator, MinValueValidator, RegexValidator
+from django.db import models
 
 
 class Skill(models.Model):
@@ -13,41 +14,36 @@ class Skill(models.Model):
 
     # Choices constants
     CATEGORY_CHOICES = [
-        ('language', 'Lenguaje de Programación'),
-        ('framework', 'Framework'),
-        ('database', 'Base de Datos'),
-        ('tool', 'Herramienta'),
-        ('cloud', 'Cloud/DevOps'),
+        ("language", "Lenguaje de Programación"),
+        ("framework", "Framework"),
+        ("database", "Base de Datos"),
+        ("tool", "Herramienta"),
+        ("cloud", "Cloud/DevOps"),
     ]
 
     PROFICIENCY_CHOICES = [
-        (1, 'Básico'),
-        (2, 'Intermedio'),
-        (3, 'Avanzado'),
-        (4, 'Experto'),
+        (1, "Básico"),
+        (2, "Intermedio"),
+        (3, "Avanzado"),
+        (4, "Experto"),
     ]
 
     # 1. Campos de datos principales
     name = models.CharField(max_length=100, unique=True, verbose_name="Nombre")
     icon_url = models.URLField(help_text="URL del icono (ej: devicon CDN)")
     years_experience = models.PositiveIntegerField(
-        null=True,
-        blank=True,
-        help_text="Años de experiencia con esta tecnología"
+        null=True, blank=True, help_text="Años de experiencia con esta tecnología"
     )
 
     # 2. Campos de categorización
     category = models.CharField(
-        max_length=50,
-        choices=CATEGORY_CHOICES,
-        default='tool',
-        verbose_name="Categoría"
+        max_length=50, choices=CATEGORY_CHOICES, default="tool", verbose_name="Categoría"
     )
     proficiency_level = models.IntegerField(
         default=3,
         choices=PROFICIENCY_CHOICES,
         validators=[MinValueValidator(1), MaxValueValidator(4)],
-        verbose_name="Nivel de competencia"
+        verbose_name="Nivel de competencia",
     )
 
     # 3. Campos de metadata
@@ -57,22 +53,24 @@ class Skill(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
+        """Django Meta options for Skill model."""
+
         verbose_name = "Habilidad"
         verbose_name_plural = "Habilidades"
-        ordering = ['display_order', 'name']
+        ordering = ["display_order", "name"]
         indexes = [
-            models.Index(fields=['is_featured']),
-            models.Index(fields=['category']),
-            models.Index(fields=['display_order']),
+            models.Index(fields=["is_featured"]),
+            models.Index(fields=["category"]),
+            models.Index(fields=["display_order"]),
         ]
         constraints = [
             models.CheckConstraint(
                 check=models.Q(proficiency_level__gte=1) & models.Q(proficiency_level__lte=4),
-                name='valid_proficiency_level'
+                name="valid_proficiency_level",
             ),
             models.CheckConstraint(
                 check=models.Q(years_experience__isnull=True) | models.Q(years_experience__gte=0),
-                name='valid_years_experience'
+                name="valid_years_experience",
             ),
         ]
 
@@ -84,7 +82,7 @@ class Skill(models.Model):
         """Validaciones personalizadas del modelo."""
         super().clean()
         if self.years_experience and self.years_experience > 50:
-            raise ValidationError('Los años de experiencia no pueden ser mayor a 50')
+            raise ValidationError("Los años de experiencia no pueden ser mayor a 50")
 
     def save(self, *args, **kwargs):
         """Override save para validar antes de guardar."""
@@ -110,7 +108,7 @@ class Skill(models.Model):
     @classmethod
     def get_featured_skills(cls):
         """Devuelve las habilidades destacadas ordenadas."""
-        return cls.objects.filter(is_featured=True).order_by('display_order', 'name')
+        return cls.objects.filter(is_featured=True).order_by("display_order", "name")
 
     @classmethod
     def get_by_category(cls, category):
@@ -133,19 +131,22 @@ class ProjectCategory(models.Model):
     # 2. Campos de presentación
     color = models.CharField(
         max_length=7,
-        default='#3B82F6',
+        default="#3B82F6",
         help_text="Color hex para la categoría",
-        validators=[RegexValidator(
-            regex=r'^#[0-9A-Fa-f]{6}$',
-            message='Debe ser un color hex válido (ej: #3B82F6)'
-        )],
-        verbose_name="Color"
+        validators=[
+            RegexValidator(
+                regex=r"^#[0-9A-Fa-f]{6}$", message="Debe ser un color hex válido (ej: #3B82F6)"
+            )
+        ],
+        verbose_name="Color",
     )
-    
+
     class Meta:
+        """Django Meta options for ProjectCategory model."""
+
         verbose_name = "Categoría de Proyecto"
         verbose_name_plural = "Categorías de Proyecto"
-        ordering = ['name']
+        ordering = ["name"]
 
     def __str__(self):
         """Representación string del modelo."""
@@ -184,19 +185,17 @@ class Project(models.Model):
     """
 
     STATUS_CHOICES = [
-        ('active', 'Activo'),
-        ('completed', 'Completado'),
-        ('archived', 'Archivado'),
-        ('in_progress', 'En Desarrollo'),
+        ("active", "Activo"),
+        ("completed", "Completado"),
+        ("archived", "Archivado"),
+        ("in_progress", "En Desarrollo"),
     ]
 
     # 1. Campos de datos principales
     title = models.CharField(max_length=200, verbose_name="Título")
     description = models.TextField(verbose_name="Descripción")
     detailed_description = models.TextField(
-        blank=True,
-        help_text="Descripción detallada opcional",
-        verbose_name="Descripción detallada"
+        blank=True, help_text="Descripción detallada opcional", verbose_name="Descripción detallada"
     )
 
     # 2. Campos de enlaces
@@ -206,30 +205,20 @@ class Project(models.Model):
         blank=True,
         null=True,
         help_text="URL de imagen destacada del proyecto",
-        verbose_name="Imagen destacada"
+        verbose_name="Imagen destacada",
     )
 
     # 3. Campos de relación
     category = models.ForeignKey(
-        ProjectCategory,
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Categoría"
+        ProjectCategory, on_delete=models.SET_NULL, null=True, blank=True, verbose_name="Categoría"
     )
     technologies = models.ManyToManyField(
-        Skill,
-        blank=True,
-        help_text="Tecnologías utilizadas",
-        verbose_name="Tecnologías"
+        Skill, blank=True, help_text="Tecnologías utilizadas", verbose_name="Tecnologías"
     )
 
     # 4. Campos de metadata
     status = models.CharField(
-        max_length=20,
-        choices=STATUS_CHOICES,
-        default='completed',
-        verbose_name="Estado"
+        max_length=20, choices=STATUS_CHOICES, default="completed", verbose_name="Estado"
     )
     is_featured = models.BooleanField(default=True, help_text="Mostrar en el portfolio")
     display_order = models.PositiveIntegerField(default=0, help_text="Orden de visualización")
@@ -241,19 +230,23 @@ class Project(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
+        """Django Meta options for Project model."""
+
         verbose_name = "Proyecto"
         verbose_name_plural = "Proyectos"
-        ordering = ['display_order', '-created_at']
+        ordering = ["display_order", "-created_at"]
         indexes = [
-            models.Index(fields=['is_featured']),
-            models.Index(fields=['status']),
-            models.Index(fields=['category']),
-            models.Index(fields=['display_order']),
+            models.Index(fields=["is_featured"]),
+            models.Index(fields=["status"]),
+            models.Index(fields=["category"]),
+            models.Index(fields=["display_order"]),
         ]
         constraints = [
             models.CheckConstraint(
-                check=models.Q(start_date__isnull=True) | models.Q(end_date__isnull=True) | models.Q(end_date__gte=models.F('start_date')),
-                name='valid_project_dates'
+                check=models.Q(start_date__isnull=True)
+                | models.Q(end_date__isnull=True)
+                | models.Q(end_date__gte=models.F("start_date")),
+                name="valid_project_dates",
             ),
         ]
 
@@ -265,7 +258,7 @@ class Project(models.Model):
         """Validaciones personalizadas del modelo."""
         super().clean()
         if self.end_date and self.start_date and self.end_date < self.start_date:
-            raise ValidationError('La fecha de fin debe ser posterior a la fecha de inicio')
+            raise ValidationError("La fecha de fin debe ser posterior a la fecha de inicio")
 
     def save(self, *args, **kwargs):
         """Override save para validar antes de guardar."""
@@ -297,15 +290,18 @@ class Project(models.Model):
     @property
     def is_in_progress(self):
         """Indica si el proyecto está en desarrollo."""
-        return self.status == 'in_progress'
+        return self.status == "in_progress"
 
     # Class methods
     @classmethod
     def get_featured_projects(cls):
         """Devuelve proyectos destacados ordenados."""
-        return cls.objects.select_related('category').prefetch_related('technologies').filter(
-            is_featured=True
-        ).order_by('display_order', '-created_at')
+        return (
+            cls.objects.select_related("category")
+            .prefetch_related("technologies")
+            .filter(is_featured=True)
+            .order_by("display_order", "-created_at")
+        )
 
     @classmethod
     def get_by_status(cls, status):
@@ -316,71 +312,79 @@ class Project(models.Model):
     def get_by_technology(cls, technology_name):
         """Devuelve proyectos que usan una tecnología específica."""
         return cls.objects.filter(
-            technologies__name__icontains=technology_name,
-            is_featured=True
+            technologies__name__icontains=technology_name, is_featured=True
         ).distinct()
 
 
 class Experience(models.Model):
+    """Model for work experience, education, and certifications."""
+
     EXPERIENCE_TYPES = [
-        ('work', 'Experiencia Laboral'),
-        ('education', 'Educación'),
-        ('certification', 'Certificación'),
-        ('volunteer', 'Voluntariado'),
+        ("work", "Experiencia Laboral"),
+        ("education", "Educación"),
+        ("certification", "Certificación"),
+        ("volunteer", "Voluntariado"),
     ]
 
     title = models.CharField(max_length=200)
     company_or_institution = models.CharField(max_length=200)
     location = models.CharField(max_length=200, blank=True)
     description = models.TextField()
-    experience_type = models.CharField(max_length=20, choices=EXPERIENCE_TYPES, default='work')
-    
+    experience_type = models.CharField(max_length=20, choices=EXPERIENCE_TYPES, default="work")
+
     # Fechas
     start_date = models.DateField()
     end_date = models.DateField(null=True, blank=True, help_text="Dejar vacío si es actual")
     is_current = models.BooleanField(default=False, help_text="¿Es el trabajo/estudio actual?")
-    
+
     # Tecnologías relacionadas
     technologies = models.ManyToManyField(Skill, blank=True)
-    
+
     # Configuración
     is_featured = models.BooleanField(default=True, help_text="Mostrar en el portfolio")
     display_order = models.PositiveIntegerField(default=0)
-    
+
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
+        """Django Meta options for Experience model."""
+
         verbose_name = "Experiencia"
         verbose_name_plural = "Experiencias"
-        ordering = ['display_order', '-start_date']
+        ordering = ["display_order", "-start_date"]
         indexes = [
-            models.Index(fields=['is_featured']),
-            models.Index(fields=['experience_type']),
-            models.Index(fields=['is_current']),
+            models.Index(fields=["is_featured"]),
+            models.Index(fields=["experience_type"]),
+            models.Index(fields=["is_current"]),
         ]
 
     def clean(self):
+        """Validate Experience model data."""
         super().clean()
         if self.end_date and self.start_date and self.end_date < self.start_date:
-            raise ValidationError('La fecha de fin debe ser posterior a la fecha de inicio')
+            raise ValidationError("La fecha de fin debe ser posterior a la fecha de inicio")
         if self.is_current and self.end_date:
-            raise ValidationError('Una experiencia actual no puede tener fecha de fin')
+            raise ValidationError("Una experiencia actual no puede tener fecha de fin")
 
     def __str__(self):
+        """Return string representation of Experience."""
         return f"{self.title} - {self.company_or_institution}"
 
     @property
     def duration(self):
+        """Get duration string for display."""
         if self.is_current:
             return f"{self.start_date.strftime('%Y')} - Presente"
         elif self.end_date:
             return f"{self.start_date.strftime('%Y')} - {self.end_date.strftime('%Y')}"
         else:
-            return self.start_date.strftime('%Y')
+            return self.start_date.strftime("%Y")
 
 
 class ContactMessage(models.Model):
+    """Model for contact form submissions."""
+
     name = models.CharField(max_length=100)
     email = models.EmailField()
     subject = models.CharField(max_length=200)
@@ -391,38 +395,52 @@ class ContactMessage(models.Model):
     admin_notes = models.TextField(blank=True, help_text="Notas internas del administrador")
 
     class Meta:
+        """Django Meta options for ContactMessage model."""
+
         verbose_name = "Mensaje de Contacto"
         verbose_name_plural = "Mensajes de Contacto"
-        ordering = ['-created_at']
+        ordering = ["-created_at"]
 
     def __str__(self):
+        """Return string representation of ContactMessage."""
         return f"{self.name} - {self.subject}"
 
 
 class PortfolioSettings(models.Model):
+    """Singleton model for portfolio site-wide settings."""
+
     site_title = models.CharField(max_length=200, default="Argenis Manzanares")
     tagline = models.CharField(max_length=300, default="Desarrollador Backend en Python")
     about_me = models.TextField(
-        default="Soy programador web backend con experiencia en Python, Django, FastAPI, Flask, SQL y Docker. Estoy enfocado en crear APIs y sistemas escalables."
+        default=(
+            "Soy programador web backend con experiencia en Python, Django, FastAPI, "
+            "Flask, SQL y Docker. Estoy enfocado en crear APIs y sistemas escalables."
+        )
     )
     email = models.EmailField(default="argenis010@gmail.com")
     github_username = models.CharField(max_length=100, default="Kallheset")
-    linkedin_url = models.URLField(default="https://www.linkedin.com/in/argenis-manzanares-108b4a349/")
+    linkedin_url = models.URLField(
+        default="https://www.linkedin.com/in/argenis-manzanares-108b4a349/"
+    )
     cv_file_path = models.CharField(
-        max_length=200, 
+        max_length=200,
         default="cv/Argenis_Manzanares_CV.pdf",
-        help_text="Ruta relativa desde static/"
+        help_text="Ruta relativa desde static/",
     )
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
+        """Django Meta options for PortfolioSettings model."""
+
         verbose_name = "Portfolio Settings"
         verbose_name_plural = "Portfolio Settings"
 
     def __str__(self):
+        """Return string representation of PortfolioSettings."""
         return "Portfolio Settings"
 
     def save(self, *args, **kwargs):
+        """Save method enforcing singleton pattern."""
         # Ensure only one instance exists (Singleton pattern)
         self.pk = 1
         super().save(*args, **kwargs)
@@ -430,5 +448,6 @@ class PortfolioSettings(models.Model):
 
     @classmethod
     def get_settings(cls):
+        """Get or create the singleton settings instance."""
         obj, created = cls.objects.get_or_create(pk=1)
         return obj
